@@ -1,6 +1,7 @@
 const express= require("express");
 const formidable = require("express-formidable");
 const app=express();
+const cors = require("cors")
 
 require ("dotenv").config();
 const cloudinary = require ("cloudinary").v2;
@@ -12,6 +13,10 @@ if (typeof (process.env.CLOUDINARY_URL) === 'undefined') {
     console.log(cloudinary.config());
   }
   console.log('-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --');
+
+  app.use(cors({
+    origin:"*"
+}))
 app.use(formidable());
 const datarouter=require("./routes");
 app.use("/posts",datarouter)
